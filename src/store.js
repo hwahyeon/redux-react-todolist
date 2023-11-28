@@ -4,26 +4,26 @@ import { v4 as uuidv4 } from "uuid";
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-export const addToDo = (text) => {
+const addToDo = (text) => {
   return {
     type: ADD,
     text,
   };
 };
 
-export const deleteToDo = (id) => {
+const deleteToDo = (id) => {
   return {
     type: DELETE,
     id,
   };
 };
 
-const reducer = (state = ['hello'], action) => {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD:
       return [{ text: action.text, id: uuidv4() }, ...state];
     case DELETE:
-      return state.filter((toDo) => toDo !== action.id);
+      return state.filter((toDo) => toDo.id !== action.id);
     default:
       return state;
   }
@@ -31,6 +31,9 @@ const reducer = (state = ['hello'], action) => {
 
 const store = createStore(reducer);
 
-// store.subscribe();
+export const actionCreators = {
+  addToDo,
+  deleteToDo
+};
 
 export default store;
