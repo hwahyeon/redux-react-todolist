@@ -7,7 +7,7 @@ function Home() {
     setText(e.target.value);
   }
 
-  function onSubmit(e){
+  function onSubmit(e) {
     e.preventDefault();
     setText("");
   }
@@ -19,6 +19,7 @@ function Home() {
         <input type="text" value={text} onChange={onChange} />
         <button>Add</button>
       </form>
+      <ul></ul>
     </>
   );
 }
