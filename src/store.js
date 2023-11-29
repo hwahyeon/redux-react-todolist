@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 const addToDo = createAction("ADD");
@@ -19,15 +19,15 @@ const deleteToDo = createAction("DELETE");
 // createReducer can modify mutate state
 const reducer = createReducer([], {
   [addToDo]: (state, action) => {
-    state.push({ text: action.payload, id: uuidv4() })
+    state.push({ text: action.payload, id: uuidv4() });
     // state.push doesn't return anything. just mutate the state
   },
-  [deleteToDo]: (state, action) => 
-    state.filter((toDo) => toDo.id !== action.payload)
-    // new state should be returned
-})
+  [deleteToDo]: (state, action) =>
+    state.filter((toDo) => toDo.id !== action.payload),
+  // new state should be returned
+});
 
-const store = createStore(reducer);
+const store = configureStore({ reducer });
 
 export const actionCreators = {
   addToDo,
